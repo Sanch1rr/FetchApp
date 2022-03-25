@@ -6,11 +6,12 @@ export default class SearchForm extends Component {
   };
   onSearchChange = (e) => {
     console.log(e);
-    this.props.onSearch(this.state.searchText);
+    // this.props.onSearch(this.state.searchText);
     this.setState({ searchText: e.target.value });
   };
   handleSubmit = (e) => {
     e.preventDefault();
+    this.props.onSearch(this.state.searchText);
 
     e.currentTarget.reset();
   };
