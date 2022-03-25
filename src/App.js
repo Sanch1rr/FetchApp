@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import SearchForm from "./components/SearchForm";
 import GifList from "./components/GifList";
+import axios from "axios";
 
 class App extends Component {
   constructor() {
@@ -11,12 +12,25 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    fetch(
-      "http://api.giphy.com/v1/gifs/trending?api_key=7AH1655auFDNR3kT7aSJfxvP7nfezgrj"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ gifs: data.data });
+    // fetch(
+    //   "http://api.giphy.com/v1/gifs/trending?api_key=7AH1655auFDNR3kT7aSJfxvP7nfezgrj"
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     this.setState({ gifs: data.data });
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error fetching and parsing data", error);
+    //   });
+
+    axios
+      .get(
+        "http://api.giphy.com/v1/gifs/trending?api_key=7AH1655auFDNR3kT7aSJfxvP7nfezgrj"
+      )
+      .then((response) => {
+        this.setState({
+          gifs: response.data.data,
+        });
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
