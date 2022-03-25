@@ -22,10 +22,25 @@ class App extends Component {
     //   .catch((error) => {
     //     console.log("Error fetching and parsing data", error);
     //   });
+    // const cats = "cats";
+    // axios
+    //   .get(
+    //     `http://api.giphy.com/v1/gifs/search?q=${cats}&api_key=7AH1655auFDNR3kT7aSJfxvP7nfezgrj`
+    //   )
+    //   .then((response) => {
+    //     this.setState({
+    //       gifs: response.data.data,
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error fetching and parsing data", error);
+    //   });
+  }
 
+  performSearch = (query) => {
     axios
       .get(
-        "http://api.giphy.com/v1/gifs/trending?api_key=7AH1655auFDNR3kT7aSJfxvP7nfezgrj"
+        `http://api.giphy.com/v1/gifs/search?q=${query}&api_key=7AH1655auFDNR3kT7aSJfxvP7nfezgrj`
       )
       .then((response) => {
         this.setState({
@@ -35,14 +50,14 @@ class App extends Component {
       .catch((error) => {
         console.log("Error fetching and parsing data", error);
       });
-  }
+  };
   render() {
     console.log(this.state.gifs);
     return (
       <div className="mean-header">
         <div className="inner">
           <h1 className="main-title">Search form</h1>
-          <SearchForm />
+          <SearchForm onSearch={this.performSearch} />
         </div>
         <div className="main-content">
           <GifList data={this.state.gifs} />
